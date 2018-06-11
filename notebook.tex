@@ -1,0 +1,1290 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Practica2}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \textless{}img
+src=``http://www.uoc.edu/portal/\_resources/common/imatges/marca\_UOC/UOC\_Masterbrand.jpg``,
+align=''left``\textgreater{}
+
+M2.951 - Tipologia i cicle de vida de les dades
+
+2017-2 · Màster universitari en Ciència de dades (Data science)
+
+Autors: Joan Bonnín i Jose L. Dolz
+
+~
+
+\hypertarget{pruxe0ctica-2-neteja-i-validaciuxf3-de-les-dades}{%
+\section{Pràctica 2: Neteja i validació de les
+dades}\label{pruxe0ctica-2-neteja-i-validaciuxf3-de-les-dades}}
+
+    \hypertarget{descripciuxf3}{%
+\subsection{Descripció}\label{descripciuxf3}}
+
+L'objectiu d'aquesta activitat serà el tractament d'un \emph{dataset},
+que pot ser el creat a la pràctica 1 o bé qualsevol dataset lliure
+disponible a Kaggle (https://www.kaggle.com). Alguns exemples de
+\emph{dataset} amb els que podeu treballar són:
+
+Red Wine Quality
+(https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009).
+
+Titanic: Machine Learning from Disaster
+(https://www.kaggle.com/c/titanic).
+
+Predict Future Sales
+(https://www.kaggle.com/c/competitive-data-science-predict-future-sales/).
+
+Els últims dos exemples corresponen a competicions actives a Kaggle de
+manera que, opcionalment, podríeu aprofitar el treball realitzat durant
+la pràctica per entrar en alguna d'aquestes competicions. Seguint les
+principals etapes d'un projecte analític, les diferents tasques a
+realitzar (i justificar) són les següents:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{} ATENCIÓ: Es important tenir instal·lats al sistema els següents}
+        \PY{c+c1}{\PYZsh{} paquets: pandas, numpy, scipy, matplotlib, sklearn, pydotplus, graphviz}
+        \PY{c+c1}{\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} Si se està utilitzan Python 3, la forma d\PYZsq{}instal·lar un paquet és}
+        \PY{c+c1}{\PYZsh{} executant la següent ordre des de la línia de comandes:}
+        \PY{c+c1}{\PYZsh{} \PYZgt{} pyp3 install nom\PYZus{}paquet}
+        
+        \PY{c+c1}{\PYZsh{} Basic maths \PYZam{} data structures}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{stats}
+        \PY{k+kn}{import} \PY{n+nn}{itertools}
+        \PY{k+kn}{import} \PY{n+nn}{math}
+        
+        \PY{c+c1}{\PYZsh{} Data rendering}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}  
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{c+c1}{\PYZsh{} Random forest}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{preprocessing}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{metrics} \PY{k}{import} \PY{n}{confusion\PYZus{}matrix}
+        
+        \PY{c+c1}{\PYZsh{} Linear model}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn} \PY{k}{import} \PY{n}{linear\PYZus{}model}
+        
+        \PY{c+c1}{\PYZsh{} Render tree}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{externals}\PY{n+nn}{.}\PY{n+nn}{six} \PY{k}{import} \PY{n}{StringIO}  
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{tree} \PY{k}{import} \PY{n}{export\PYZus{}graphviz}
+        \PY{k+kn}{import} \PY{n+nn}{pydotplus}
+        \PY{k+kn}{import} \PY{n+nn}{graphviz}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} General constants}
+        \PY{n}{PVAL\PYZus{}THRESHOLD} \PY{o}{=} \PY{l+m+mf}{0.05}
+        \PY{n}{RANDOM\PYZus{}SEED} \PY{o}{=} \PY{l+m+mi}{2018}
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{n}{RANDOM\PYZus{}SEED}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{descripcio-del-dataset.-perque-es-important-i-quina-preguntaproblema-preten-respondre}{%
+\subsection{1. Descripció del dataset. Perquè és important i quina
+pregunta/problema pretèn
+respondre?}\label{descripcio-del-dataset.-perque-es-important-i-quina-preguntaproblema-preten-respondre}}
+
+     Per aquesta pràctica hem escollit el conjunt de dades de la qualitat
+del vi negre que, com bé s'explica en la seva pàgina de Kaggle, tracta
+de les variants del vi portuguès conegut com `Vinho Verde'. Els camps
+que composen el dataset són tots numèrics i són els següents:
+
+fixed acidity: acidesa fixa (g/l). Majoria dels àcids fixos o no
+volàtils fàcilment.
+
+volatile acidity: acidesa volàtil (g/l). Quantitat d'àcid acètic que en
+gran quantitat porta al vi a tenir gust de vinagre.
+
+citric acid: àcid cítric (g/l). Quantitat d'aquest àcid (normalment
+petita) que pot donar sabor i frescor als vins
+
+residual sugar: sucre residual (g/l). Quantitat de sucre que queda
+després de la fermentació. És estrany trobar vins amb menys d'1 g/l i
+els que tenen més de 45 g/l es consideren dolços.
+
+chlorides: clorurs (g/l). Representa la quantitat de sal al vi.
+
+free sulfur dioxide: diòxid de sofre lliure o SO2 (mg/l). Parts per
+milió (ppm) del diòxid que queda lliure un cop es barreja en barrejar-se
+amb el vi.
+
+total sulfur dioxide: Diòxid de sofre total (mg/l). La suma (en ppm) de
+la part lliure i la part fixada al vi de SO2.
+
+density: densitat (g/l). Aquest valor dependrà de la quantitat d'alcohol
+i sucre en el vi.
+
+pH: descriu com d'àcid o bàsic és un vi en una escala de 0 (molt àcid) a
+14 (molt bàsic); La majoria dels vins són entre 3 i 4 en l'escala de pH.
+
+sulphates: sulfats (g/l), que contribueixen al SO2.
+
+Aquest component prevé al vi de bacteris i de l'oxidació.
+
+alcohol: percentatge de contingut alcohòlic en el vi. Volum d'etanol /
+Volum del producte
+
+quality: qualitat del vi en una puntuació entre el 0 i el 10.
+
+Com podem veure, tenim els 12 atributs: 11 mesures físico-químiques i la
+qualitat, que podríem dir que és la classe.
+
+Aquest conjunt de dades és important perquè ens pot servir perquè,
+mitjançant proves de correlació, podem veure quins atributs són més
+influents a l'hora de millorar o empitjorar la qualitat d'un vi. A més,
+entrenarem un model complex d'aprenentatge computacional que podrà
+predir la qualitat d'un vi, mitjançant aquestes dades físico-químiques
+obtingudes pels diferents instruments de mesurament.
+
+    \hypertarget{integracio-i-seleccio-de-les-dades-dinteres-a-analitzar.}{%
+\subsection{2. Integració i selecció de les dades d'interès a
+analitzar.}\label{integracio-i-seleccio-de-les-dades-dinteres-a-analitzar.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{wine\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{winequality\PYZhy{}red.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{El conjunt de dades presenta }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ camps i està compost per }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ registres.}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{wine\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{wine\PYZus{}df}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        \PY{n}{display}\PY{p}{(}\PY{n}{wine\PYZus{}df}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+El conjunt de dades presenta 12 camps i està compost per 1599 registres.
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+   fixed acidity  volatile acidity  citric acid  residual sugar  chlorides  \
+0            7.4              0.70         0.00             1.9      0.076   
+1            7.8              0.88         0.00             2.6      0.098   
+2            7.8              0.76         0.04             2.3      0.092   
+3           11.2              0.28         0.56             1.9      0.075   
+4            7.4              0.70         0.00             1.9      0.076   
+
+   free sulfur dioxide  total sulfur dioxide  density    pH  sulphates  \
+0                 11.0                  34.0   0.9978  3.51       0.56   
+1                 25.0                  67.0   0.9968  3.20       0.68   
+2                 15.0                  54.0   0.9970  3.26       0.65   
+3                 17.0                  60.0   0.9980  3.16       0.58   
+4                 11.0                  34.0   0.9978  3.51       0.56   
+
+   alcohol  quality  
+0      9.4        5  
+1      9.8        5  
+2      9.8        5  
+3      9.8        6  
+4      9.4        5  
+    \end{verbatim}
+
+    
+    Com podem observar en la taula, tots els atributs presenten valors
+numèrics continus que ens poden servir per cercar una relació lineal amb
+el valor discret de la qualitat. En aquest punt, no podem prescindir de
+cap d'aquests atributs doncs no sabem quina és la seva relació amb la
+nota de qualitat. Per tant, no ens desfarem de cap.
+
+Per altra banda, crearem un atribut categòric booleà que etiqueti si un
+vi és bo o dolent, depenent de la seva nota. En el nostre cas, escollim
+que els bons vins són aquells que tenen una puntuació de qualitat de 6 o
+superior. Aquest atribut ens servirà com a classificador per la creació
+d'un model basat en \emph{Random Forests}.
+
+\begin{verbatim}
+</font>
+    
+\end{verbatim}
+
+    \hypertarget{neteja-de-les-dades.}{%
+\subsection{3. Neteja de les dades.}\label{neteja-de-les-dades.}}
+
+    \hypertarget{les-dades-contenen-zeros-o-elements-buits-com-gestionaries-aquests-casos}{%
+\subsubsection{3.1. Les dades contenen zeros o elements buits? Com
+gestionaries aquests
+casos?}\label{les-dades-contenen-zeros-o-elements-buits-com-gestionaries-aquests-casos}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{} Contem els valors nuls}
+        \PY{n}{n\PYZus{}nulls} \PY{o}{=} \PY{n}{wine\PYZus{}df}\PY{p}{[}\PY{n}{wine\PYZus{}df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Contem els zeros}
+        \PY{n}{n\PYZus{}zeros} \PY{o}{=} \PY{n}{wine\PYZus{}df}\PY{p}{[}\PY{n}{wine\PYZus{}df} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}
+        
+        \PY{n}{df\PYZus{}empties} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df\PYZus{}empties}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nombre de Nulls}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{n\PYZus{}nulls}
+        \PY{n}{df\PYZus{}empties}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Nombre de zeros}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{n\PYZus{}zeros}
+        \PY{n}{display}\PY{p}{(}\PY{n}{df\PYZus{}empties}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+                 fixed acidity  volatile acidity  citric acid  residual sugar  \
+Nombre de Nulls              0                 0            0               0   
+Nombre de zeros              0                 0          132               0   
+
+                 chlorides  free sulfur dioxide  total sulfur dioxide  \
+Nombre de Nulls          0                    0                     0   
+Nombre de zeros          0                    0                     0   
+
+                 density  pH  sulphates  alcohol  quality  
+Nombre de Nulls        0   0          0        0        0  
+Nombre de zeros        0   0          0        0        0  
+    \end{verbatim}
+
+    
+    Com podem observar, no tenim cap atribut que presenti valors nuls. Per
+altra banda, només trobem zeros en l'atribut d'àcid cítric.
+Concretament, tenim 132 zeros d'un total de 1599 registres, el que
+representa un 8'26\% del total.
+
+En aquest cas, no cal que substituïm els zeros per cap altre valor. És
+totalment normal trobar vins negres sense àcid cítric, fet que els hi
+dóna un sabor més anyenc. De fet, com veurem més endavant, el rang de
+grams per litre de l'àcid cítric en vins negres és molt petit i el zero
+estaria dintre dels barems. Fins i tot podem trobar vins blancs amb zero
+grams d'àcid cítric, tot i que en aquests acostuma a haver-hi unes
+quantitats més altes que als vins negres.
+
+Així doncs, podem observar que en aquest sentit, pel que fa a zeros i
+valors nuls, el \emph{dataset} està completament net des de l'inici. És
+bastant raonable pensar que Kaggle ha realitzat una tasca prèvia de
+neteja per facilitar l'ús de les dades amb intencions analítiques, sense
+haver de dedicar gaire esforç a la neteja inicial.
+
+    \hypertarget{identificacio-i-tractament-de-valors-extrems.}{%
+\subsubsection{3.2. Identificació i tractament de valors
+extrems.}\label{identificacio-i-tractament-de-valors-extrems.}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{} Dibueixem un boxplot per cada atribut per veure màxims, }
+        \PY{c+c1}{\PYZsh{} mínims, quartils, rang interquartilic i outliers.}
+        
+        \PY{n}{df\PYZus{}cols} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{wine\PYZus{}df}\PY{p}{)}
+        \PY{n}{n\PYZus{}rows} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{n\PYZus{}cols} \PY{o}{=} \PY{l+m+mi}{6}
+        
+        \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{n\PYZus{}rows}\PY{p}{,} \PY{n}{n\PYZus{}cols}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{row\PYZus{}axes} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{axes}\PY{p}{)}\PY{p}{:}
+            \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{ax} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{row\PYZus{}axes}\PY{p}{)}\PY{p}{:}
+                \PY{n}{idx} \PY{o}{=} \PY{n}{i}\PY{o}{*}\PY{n}{n\PYZus{}cols} \PY{o}{+} \PY{n}{j}
+                \PY{n}{wine\PYZus{}df}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{column}\PY{o}{=}\PY{n}{df\PYZus{}cols}\PY{p}{[}\PY{n}{idx}\PY{p}{]}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{axes}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{grid}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+                
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Als \emph{boxplots} s'observa que la majoria de variables presenten una
+quantitat elevada d'\emph{outliers}, així que val la pena aplicar-hi una
+anàlisi més extensa per detectar si es tracta de presència de valors
+erronis o la realitat de les dades és la que es mostra.
+
+El fet que la majoria d'\emph{outliers} s'agrupin a prop dels bigotis i
+la densitat baixi segons s'allunyen, ens fa pensar que els valors poden
+ser correctes, i que simplement la distribució presenta una desviació
+lateral o una variància molt elevada. Un exemple habitual per mostrar
+dades que presenten aquesta característica són els salaris.
+
+    \hypertarget{analisi-de-les-dades.}{%
+\subsection{4. Anàlisi de les dades.}\label{analisi-de-les-dades.}}
+
+\#\#\#~4.1. Selecció dels grups de dades que es volen analitzar/comparar
+(planificació dels anàlisis a aplicar).
+
+    No descartarem cap dels atributs que ofereix el conjunt de dades
+proporcionat perquè volem esbrinar quins són els que tenen més
+importància, quins ofereixen una distribució normal i quins no, com és
+la relació de variàncies, l'anàlisi de correlacions i, finalment, un
+model de classificació.
+
+\begin{verbatim}
+</font>
+\end{verbatim}
+
+    \hypertarget{comprovacio-de-la-normalitat-i-homogeneitat-de-la-variancia.}{%
+\subsubsection{4.2. Comprovació de la normalitat i homogeneïtat de la
+variància.}\label{comprovacio-de-la-normalitat-i-homogeneitat-de-la-variancia.}}
+
+    El Teorema del Límit Central ens diu que qualsevol població amb un
+nombre d'elements prou gran tendeix a una distribució normal estàndard.
+En el nostre cas, considerem que aquest Teorema es pot aplicar quan N
+\textgreater{} 30. Per tant, el nostre conjunt tendeix a una distribució
+normal.
+
+\begin{verbatim}
+<p>
+    De totes maneres, a continuació fem servir histogrames i el test de normalitat d'Anderson-Darling per assegurar-nos:
+</p>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} NORMALITAT \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{} Mètodes gràfics }
+        \PY{k}{def} \PY{n+nf}{render\PYZus{}normality\PYZus{}histograms}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{n\PYZus{}rows} \PY{o}{=} \PY{l+m+mi}{3}
+            \PY{n}{n\PYZus{}cols} \PY{o}{=} \PY{l+m+mi}{4}
+            \PY{n}{n\PYZus{}bars} \PY{o}{=} \PY{l+m+mi}{30}
+            \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{n\PYZus{}rows}\PY{p}{,} \PY{n}{n\PYZus{}cols}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,} \PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{row\PYZus{}axes} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{axes}\PY{p}{)}\PY{p}{:}
+                \PY{k}{for} \PY{n}{j}\PY{p}{,} \PY{n}{ax} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{row\PYZus{}axes}\PY{p}{)}\PY{p}{:}
+                    \PY{n}{idx} \PY{o}{=} \PY{n}{i}\PY{o}{*}\PY{n}{n\PYZus{}cols} \PY{o}{+} \PY{n}{j}
+        
+                    \PY{n}{attr} \PY{o}{=} \PY{n}{df\PYZus{}cols}\PY{p}{[}\PY{n}{idx}\PY{p}{]}
+                    \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{n}{attr}\PY{p}{)}      
+        
+                    \PY{n}{data} \PY{o}{=} \PY{n}{wine\PYZus{}df}\PY{p}{[}\PY{n}{attr}\PY{p}{]}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{p}{)}
+                    \PY{n}{ax}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{n}{n\PYZus{}bars}\PY{p}{,} \PY{n}{density}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+                    \PY{n}{norm} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{norm}\PY{o}{.}\PY{n}{pdf}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{std}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{norm}\PY{p}{)} 
+            \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+            
+        \PY{k}{def} \PY{n+nf}{render\PYZus{}normality\PYZus{}table}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{p}{(}\PY{n}{anderson\PYZus{}true}\PY{p}{,} \PY{n}{anderson\PYZus{}false}\PY{p}{)} \PY{o}{=} \PY{n}{test\PYZus{}normality\PYZus{}anderson}\PY{p}{(}\PY{p}{)}
+               
+            \PY{n}{anderson} \PY{o}{=} \PY{n}{merge\PYZus{}normality\PYZus{}results}\PY{p}{(}\PY{n}{anderson\PYZus{}true}\PY{p}{,} \PY{n}{anderson\PYZus{}false}\PY{p}{)}
+            
+            \PY{n}{normality\PYZus{}res} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{[}\PY{n}{anderson}\PY{p}{]}\PY{p}{,}
+                                         \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test Anderson\PYZhy{}Darling}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+            \PY{n}{normality\PYZus{}res}\PY{o}{.}\PY{n}{columns}\PY{o}{.}\PY{n}{name} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Segueix distribució normal?}\PY{l+s+s2}{\PYZdq{}}
+            \PY{n}{display}\PY{p}{(}\PY{n}{normality\PYZus{}res}\PY{p}{)}
+                
+                
+        \PY{c+c1}{\PYZsh{} Mètodes numèrics}
+        \PY{k}{def} \PY{n+nf}{test\PYZus{}normality\PYZus{}anderson}\PY{p}{(}\PY{n}{p\PYZus{}value\PYZus{}threshold}\PY{o}{=}\PY{n}{PVAL\PYZus{}THRESHOLD}\PY{p}{,} \PY{n}{render}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{p}{:}
+            \PY{n}{normal\PYZus{}attrs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{non\PYZus{}normal\PYZus{}attrs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{attr\PYZus{}key} \PY{o+ow}{in} \PY{n}{wine\PYZus{}df}\PY{p}{:}
+                \PY{n}{attr} \PY{o}{=} \PY{n}{wine\PYZus{}df}\PY{p}{[}\PY{n}{attr\PYZus{}key}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+                \PY{n}{res} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{anderson}\PY{p}{(}\PY{n}{attr}\PY{p}{,} \PY{n}{dist}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{norm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n}{stat} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{statistic}
+                \PY{n}{threshold} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{critical\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]} \PY{c+c1}{\PYZsh{}0.05 significance == PVAL\PYZus{}THRESHOLD}
+                \PY{k}{if} \PY{n}{stat} \PY{o}{\PYZgt{}} \PY{n}{threshold}\PY{p}{:}
+                    \PY{n}{normal\PYZus{}attrs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{attr\PYZus{}key}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n}{non\PYZus{}normal\PYZus{}attrs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{attr\PYZus{}key}\PY{p}{)}
+                    
+            \PY{k}{if} \PY{n}{render}\PY{p}{:}
+                \PY{n}{print\PYZus{}attrs\PYZus{}distributions}\PY{p}{(}\PY{n}{normal\PYZus{}attrs}\PY{p}{,} \PY{n}{non\PYZus{}normal\PYZus{}attrs}\PY{p}{)}
+                
+            \PY{k}{return} \PY{p}{(}\PY{n}{normal\PYZus{}attrs}\PY{p}{,} \PY{n}{non\PYZus{}normal\PYZus{}attrs}\PY{p}{)}
+        
+            
+        \PY{k}{def} \PY{n+nf}{print\PYZus{}attrs\PYZus{}distributions}\PY{p}{(}\PY{n}{normal}\PY{p}{,} \PY{n}{non\PYZus{}normal}\PY{p}{)}\PY{p}{:}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Atributs amb distribució normal: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{normal}\PY{p}{)}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Atributs amb distribució no normal: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{non\PYZus{}normal}\PY{p}{)}\PY{p}{)}
+        
+            
+        \PY{k}{def} \PY{n+nf}{merge\PYZus{}normality\PYZus{}results}\PY{p}{(}\PY{n}{normal}\PY{p}{,} \PY{n}{non\PYZus{}normal}\PY{p}{)}\PY{p}{:}
+            \PY{n}{dict\PYZus{}normal} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{k}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{✓}\PY{l+s+s1}{\PYZsq{}} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{normal}\PY{p}{\PYZcb{}}
+            \PY{n}{dict\PYZus{}non\PYZus{}normal} \PY{o}{=} \PY{p}{\PYZob{}}\PY{n}{k}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{✗}\PY{l+s+s1}{\PYZsq{}} \PY{k}{for} \PY{n}{k} \PY{o+ow}{in} \PY{n}{non\PYZus{}normal}\PY{p}{\PYZcb{}}
+            
+            \PY{c+c1}{\PYZsh{}inplace\PYZus{}merging}
+            \PY{n}{dict\PYZus{}normal}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{n}{dict\PYZus{}non\PYZus{}normal}\PY{p}{)}    
+            \PY{k}{return} \PY{n}{dict\PYZus{}normal}
+        
+        \PY{n}{render\PYZus{}normality\PYZus{}histograms}\PY{p}{(}\PY{p}{)}
+        \PY{n}{render\PYZus{}normality\PYZus{}table}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    
+    \begin{verbatim}
+Segueix distribució normal? alcohol chlorides citric acid density  \
+Test Anderson-Darling             ✓         ✓           ✓       ✓   
+
+Segueix distribució normal? fixed acidity free sulfur dioxide pH quality  \
+Test Anderson-Darling                   ✓                   ✓  ✓       ✓   
+
+Segueix distribució normal? residual sugar sulphates total sulfur dioxide  \
+Test Anderson-Darling                    ✓         ✓                    ✓   
+
+Segueix distribució normal? volatile acidity  
+Test Anderson-Darling                      ✓  
+    \end{verbatim}
+
+    
+    El test d'Anderson-Darling ens mostra com tots els atributs segueixen
+una distribució normal. Això també ho corrobora els histogrames i la
+corba de distribució normal. Tot i això, amb grans conjunts de dades,
+els tests numèrics sobre normalitat no són gaire fiables. Per tant, tal
+com veiem a les corbes i el que hem comentat sobre el Teorema del Límit
+Central, considerarem que tots els atributs segueixen una distribució
+normal.
+
+Per avaluar l'homogeneitat de la variància disposem de diferents
+tècniques i eines. Entre les més conegudes trobem \emph{Levene} i
+\emph{Fligner}, així que passem a aplicar-los mitjançant la
+implementació d'Scipy.
+
+\begin{verbatim}
+</font>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} HOMOGENEITAT VARIANCIA \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{c+c1}{\PYZsh{} Levene és util si la normalitat no està asegurada}
+        \PY{k}{def} \PY{n+nf}{levene\PYZus{}test}\PY{p}{(}\PY{n}{threshold}\PY{o}{=}\PY{n}{PVAL\PYZus{}THRESHOLD}\PY{p}{)}\PY{p}{:}
+            \PY{n}{res} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{levene}\PY{p}{(}\PY{o}{*}\PY{n}{wine\PYZus{}df}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{center}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Expand matrix to n parameters with \PYZsq{}*\PYZsq{}}
+            \PY{k}{return} \PY{n}{res}\PY{o}{.}\PY{n}{pvalue}
+        \PY{c+c1}{\PYZsh{}     return res}
+            \PY{n}{p} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{pvalue}
+            \PY{n}{pprint}\PY{p}{(}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Levene}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{p}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}
+        
+        \PY{k}{def} \PY{n+nf}{fligner\PYZus{}test}\PY{p}{(}\PY{n}{threshold}\PY{o}{=}\PY{n}{PVAL\PYZus{}THRESHOLD}\PY{p}{)}\PY{p}{:}
+            \PY{n}{res} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{fligner}\PY{p}{(}\PY{o}{*}\PY{n}{wine\PYZus{}df}\PY{o}{.}\PY{n}{as\PYZus{}matrix}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{center}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{c+c1}{\PYZsh{} Expand matrix to n parameters with \PYZsq{}*\PYZsq{}}
+            \PY{k}{return} \PY{n}{res}\PY{o}{.}\PY{n}{pvalue}
+        \PY{c+c1}{\PYZsh{}     return res}
+            \PY{n}{p} \PY{o}{=} \PY{n}{res}\PY{o}{.}\PY{n}{pvalue}
+            \PY{n}{pprint}\PY{p}{(}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Flinger}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{p}\PY{p}{)}\PY{p}{)}
+            \PY{k}{return} \PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{threshold}
+        
+        
+        \PY{n}{variance\PYZus{}tests} \PY{o}{=} \PY{p}{[}\PY{n}{levene\PYZus{}test}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{fligner\PYZus{}test}\PY{p}{(}\PY{p}{)}\PY{p}{]}
+        \PY{n}{are\PYZus{}equal} \PY{o}{=} \PY{p}{[}\PY{n}{p} \PY{o}{\PYZgt{}} \PY{n}{PVAL\PYZus{}THRESHOLD} \PY{k}{for} \PY{n}{p} \PY{o+ow}{in} \PY{n}{variance\PYZus{}tests}\PY{p}{]}
+        
+        \PY{n}{display}\PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}
+            \PY{p}{\PYZob{}}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Populations with equal variances?}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{are\PYZus{}equal}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}value}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{variance\PYZus{}tests}
+            \PY{p}{\PYZcb{}}\PY{p}{,}
+            \PY{n}{index}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Levene test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fligner test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{p}{)}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+                                  Levene test Fligner test
+Populations with equal variances?        True         True
+p-value                                     1            1
+    \end{verbatim}
+
+    
+    Com podem observar, les poblacions passen el test de Levene i el test de
+Fligner i, per tant podem assegurar que existeix una homogeneïtat en les
+variàncies dels atributs.
+
+\begin{verbatim}
+</font>
+\end{verbatim}
+
+    \hypertarget{aplicacio-de-proves-estadistiques-per-comparar-els-grups-de-dades.-en-funcio-de-les-dades-i-de-lobjectiu-de-lestudi-aplicar-proves-de-contrast-dhipotesis-correlacions-regressions-etc.}{%
+\subsubsection{4.3. Aplicació de proves estadístiques per comparar els
+grups de dades. En funció de les dades i de l'objectiu de l'estudi,
+aplicar proves de contrast d'hipòtesis, correlacions, regressions,
+etc.}\label{aplicacio-de-proves-estadistiques-per-comparar-els-grups-de-dades.-en-funcio-de-les-dades-i-de-lobjectiu-de-lestudi-aplicar-proves-de-contrast-dhipotesis-correlacions-regressions-etc.}}
+
+    Per aplicar diferents estudis sobre les dades, hem definit dues
+preguntes a respondre: \emph{Quines característiques determinen la
+qualitat del vi?} i \emph{Es pot inferir, a partir de la característica
+més important, la qualitat del vi?} 
+
+    \hypertarget{quines-caracteruxedstiques-determinen-la-qualitat-del-vi}{%
+\subsubsection{Quines característiques determinen la qualitat del
+vi?}\label{quines-caracteruxedstiques-determinen-la-qualitat-del-vi}}
+
+La primera aproximació per determinar quines variables tenen més pes
+sobre la qualitat final és cercar si existeix una correlació entre els
+atributs i la qualitat i quin és el pes de cadascun.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{} Mirem les correlacions entre els atributs i la qualitat}
+        \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{ndarray}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}cols}\PY{p}{)}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}
+        \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}cols}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            \PY{n}{attr} \PY{o}{=} \PY{n}{df\PYZus{}cols}\PY{p}{[}\PY{n}{i}\PY{p}{]}
+            \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{stats}\PY{o}{.}\PY{n}{pearsonr}\PY{p}{(}\PY{n}{wine\PYZus{}df}\PY{p}{[}\PY{n}{attr}\PY{p}{]}\PY{p}{,} \PY{n}{wine\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{df\PYZus{}pearson} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{n}{df\PYZus{}cols}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{estimació}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}valor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{11}\PY{p}{]}
+        \PY{n}{df\PYZus{}pearson}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tmp\PYZus{}sort}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}pearson}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{estimació}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{abs}\PY{p}{(}\PY{p}{)}
+        \PY{n}{df\PYZus{}pearson} \PY{o}{=} \PY{n}{df\PYZus{}pearson}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tmp\PYZus{}sort}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tmp\PYZus{}sort}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} Format output}
+        \PY{c+c1}{\PYZsh{} pprint(df\PYZus{}pearson[\PYZsq{}estimació\PYZsq{}].values)}
+        \PY{n}{df\PYZus{}pearson}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{estimació}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.4f\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{el}\PY{p}{)} \PY{k}{for} \PY{n}{el} \PY{o+ow}{in} \PY{n}{df\PYZus{}pearson}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{estimació}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{]}
+        \PY{n}{df\PYZus{}pearson}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}valor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+si}{\PYZob{}0:.2e\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{el}\PY{p}{)} \PY{k}{for} \PY{n}{el} \PY{o+ow}{in} \PY{n}{df\PYZus{}pearson}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{p\PYZhy{}valor}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{]}
+        \PY{n}{display}\PY{p}{(}\PY{n}{df\PYZus{}pearson}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+            alcohol volatile acidity sulphates citric acid  \
+estimació    0.4762          -0.3906    0.2514      0.2264   
+p-valor    2.83e-91         2.05e-59  1.80e-24    4.99e-20   
+
+          total sulfur dioxide   density chlorides fixed acidity        pH  \
+estimació              -0.1851   -0.1749   -0.1289        0.1241   -0.0577   
+p-valor               8.62e-14  1.87e-12  2.31e-07      6.50e-07  2.10e-02   
+
+          free sulfur dioxide residual sugar  
+estimació             -0.0507         0.0137  
+p-valor              4.28e-02       5.83e-01  
+    \end{verbatim}
+
+    
+    Hem ordenat els atributs dels que més impacten a l'hora de determinar la
+qualitat als que menys. Tal i com podem observar, la qualitat augmenta
+gairebé un 50\% segons el volum d'\textbf{alcohol} que tenim en el vi.
+Per altra banda, el 40\% de quantitat d'\textbf{acidesa volàtil}
+influeix negativament en la qualitat. És a dir, com més sàpiga a
+vinagre, pitjor.
+
+\begin{verbatim}
+<p>
+    Seguidament tenim que el 25% de la quantitat de **sulfats** augmenten la qualitat. Sembla obvi, doncs aquest component ajuda que el vi no s'oxidi i impedeix l'aparició de bacteris. Però per altra banda, paradoxalment, el **SO2 total i el lliure** resten qualitat al vi (un 18'5%  i un 5% de la seva quantitat, respectivament). 
+</p>
+<p>
+    L'**àcid cítric** suma el 22'6% del seu valor i podem deduir que un vi que sigui més fresc afavoreix a obtenir una millor nota. Per altra banda, com menys dens és el vi -menys líquid- pitjor la seva qualitat, restant un 17'5% del valor de la **densitat**. La quantitat de **clorurs** també afecta negativament, restant quasi un 13% del seu valor: com més salat estigui el vi, pitjor qualitat tindrà. Per altra banda, el valor del **sucre** només suma un 1'4% del seu valor. No ens ha de resultar xocant doncs estem parlant de vins negres i aquests no acostumen a ser dolços (tret que siguin escumosos, però no és el cas d'aquests). 
+</p>
+<p>
+    Darrerament, tenim que el **pH**, que resta un 5% del seu valor a la qualitat final. És a dir, com més àcid sigui un vi, pitjor encara que no compti molt. Però, per altra banda, l'**acidesa fixa** suma a la qualitat del vi un 12'4% del seu valor. 
+</p>
+<p>
+    Pel que fa als p-valors, podem descartar tots aquells atributs que superin el llindar de 0.05. Només el sucre supera aquest llindar i, per tant, no el faríem servir en un model de regressió lineal.
+</p>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{} Correlació dels atributs}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{plotting}\PY{o}{.}\PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{wine\PYZus{}df}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{p}{:}\PY{l+m+mi}{11}\PY{p}{]}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_29_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    En el gràfic de correlacions entre parells d'atributs -considerant que
+són tots normals- podem veure clarament la relació directa que havíem
+explicat al principi entre el SO2 lliure i total: com més tenim d'un,
+més tenim de l'altre.
+
+Per altra banda, tenim atributs que es relacionen fortament entre si.
+Per exemple, com més àcid cítric, més acidesa fixa. Això ens fa pensar
+que pujant aquest dos paràmetres obtindríem millor nota perquè, a més,
+com més acidesa fixa, menys pH, que li resta qualitat. A més a més, com
+més àcid cítric, menys acidesa volàtil i, per tant, menys sabor a
+vinagre. Però tenim el problema que com més quantitat d'acidesa fixa,
+derivada de l'àcid cítric, augmentem també la seva densitat, que va en
+detriment de la qualitat. Com veiem, trobar els paràmetres
+físico-químics equilibrats per treure un vi de molt bona qualitat és una
+tasca força feixuga.
+
+\begin{verbatim}
+<p>
+    A continuació, construirem un model de predicció. Serà una combinació d'arbres de decisió entrenats amb bagging (usant mostreig amb reemplaçament), també conegut com Random Forests. Hem escollit aquest classificador per diferents motius: curiositat acadèmica, aproximar-nos al treball amb eines d'entorns reals i, principalment, que és un model amb el coneixement accessible.
+</p>
+<p>
+\end{verbatim}
+
+Això vol dir que, a diferència d'altres models molt coneguts com les
+xarxes neuronals, el model descriu perfectament perquè es comporta com
+ho fa. Donat que la pregunta que volem resoldre és conèixer els factors
+amb més pes per definir la qualitat del vi, el model \emph{Random
+Forest} sembla el candidat idoni per aquesta tasca.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{}Inserció d\PYZsq{}atribut qualitatiu per la qualitat del vi}
+         \PY{n}{CLASSES\PYZus{}NAMES} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Bad wine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Good wine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{GOOD\PYZus{}THRESHOLD} \PY{o}{=} \PY{l+m+mi}{6}
+         \PY{n}{raw\PYZus{}y} \PY{o}{=} \PY{n}{wine\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZgt{}}\PY{o}{=} \PY{n}{GOOD\PYZus{}THRESHOLD}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{k}{def} \PY{n+nf}{encode\PYZus{}raw\PYZus{}y}\PY{p}{(}\PY{n}{raw\PYZus{}y}\PY{p}{)}\PY{p}{:}    
+             \PY{n}{le} \PY{o}{=} \PY{n}{preprocessing}\PY{o}{.}\PY{n}{LabelEncoder}\PY{p}{(}\PY{p}{)}
+             \PY{n}{y} \PY{o}{=} \PY{n}{le}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{raw\PYZus{}y}\PY{p}{)}
+             \PY{k}{return} \PY{n}{y}
+         
+         \PY{k}{def} \PY{n+nf}{random\PYZus{}forest\PYZus{}preprocess\PYZus{}data}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{raw\PYZus{}y}\PY{p}{)}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{}Input data}
+             \PY{n}{X} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{}Labels}
+             \PY{n}{y} \PY{o}{=} \PY{n}{encode\PYZus{}raw\PYZus{}y}\PY{p}{(}\PY{n}{raw\PYZus{}y}\PY{p}{)}
+             \PY{k}{return} \PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{split\PYZus{}train\PYZus{}test}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+             \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}
+                 \PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{test\PYZus{}size}\PY{o}{=}\PY{l+m+mf}{0.15}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{RANDOM\PYZus{}SEED}
+             \PY{p}{)}
+             \PY{k}{return} \PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{display\PYZus{}precission}\PY{p}{(}\PY{n}{score}\PY{p}{)}\PY{p}{:}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Precisió del model: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{score}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)} \PY{o}{=} \PY{n}{random\PYZus{}forest\PYZus{}preprocess\PYZus{}data}\PY{p}{(}\PY{n}{wine\PYZus{}df}\PY{p}{,} \PY{n}{raw\PYZus{}y}\PY{p}{)}
+         \PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)} \PY{o}{=} \PY{n}{split\PYZus{}train\PYZus{}test}\PY{p}{(}\PY{n}{X}\PY{p}{,} \PY{n}{y}\PY{p}{)}
+         
+         \PY{n}{rfc\PYZus{}model} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{bootstrap}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{n\PYZus{}estimators} \PY{o}{=} \PY{l+m+mi}{150}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{RANDOM\PYZus{}SEED}\PY{p}{)}
+         \PY{n}{rfc\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} RandomForestClassifier(bootstrap=True, class\_weight=None, criterion='gini',
+                     max\_depth=None, max\_features='auto', max\_leaf\_nodes=None,
+                     min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                     min\_samples\_leaf=1, min\_samples\_split=2,
+                     min\_weight\_fraction\_leaf=0.0, n\_estimators=150, n\_jobs=8,
+                     oob\_score=False, random\_state=2018, verbose=0,
+                     warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{rfc\PYZus{}score} \PY{o}{=} \PY{n}{rfc\PYZus{}model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n}{display\PYZus{}precission}\PY{p}{(}\PY{n}{rfc\PYZus{}score}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} pprint(rfc\PYZus{}model.feature\PYZus{}importances\PYZus{})}
+         \PY{n}{importances\PYZus{}df} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}
+             \PY{n}{rfc\PYZus{}model}\PY{o}{.}\PY{n}{feature\PYZus{}importances\PYZus{}}\PY{p}{,}
+             \PY{n}{index}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}\PY{p}{,}
+             \PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Importància}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{p}{)}
+         \PY{n}{importances\PYZus{}df} \PY{o}{=} \PY{n}{importances\PYZus{}df}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Importància}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+         \PY{n}{display}\PY{p}{(}\PY{n}{importances\PYZus{}df}\PY{o}{.}\PY{n}{T}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precisió del model: 78.75 \%
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+              alcohol  sulphates  volatile acidity  total sulfur dioxide  \
+Importància  0.189099   0.126577          0.120986              0.099195   
+
+              density  chlorides        pH  fixed acidity  citric acid  \
+Importància  0.082641   0.071539  0.069156       0.066683     0.062752   
+
+             free sulfur dioxide  residual sugar  
+Importància             0.057955        0.053415  
+    \end{verbatim}
+
+    
+    Com podem veure, la importància que atorga als atributs el nostre model
+basat en boscos aleatoris (\emph{Random Forests}) són bastant semblants
+als obtinguts en la correlació lineal, sent l'alcohol el de major pes i
+el sucre residual el que menys. No hem de confondre els pesos que dóna
+el \emph{Random Forest} als atributs (on la seva suma és 1) amb els
+factors donats en la correlació lineal amb la qualitat.
+
+Per altra banda, obtenim una precisió prou alta encara que una mica per
+sota del llindar del 80\% al qual estem acostumats a donar per bo el
+model. Hem de tenir en compte que un model complex com són els
+\emph{Random Forests} millora la seva precisió com més gran és el seu
+conjunt d'entrenament. Per tant, podem assegurar que utilitzant les
+dades dels vins de collites d'altres anys -recordem que estem fent
+servir només l'any 2009- millorarem la precisió de manera que aquest
+model podrà determinar de forma més exacta la qualitat de vins futurs.
+
+\begin{verbatim}
+<p>
+    Una vegada hem realitzat aquestes diferents proves i anàlisis, podem dir clarament que la característica amb més pes per determinar la qualitat del vi, sorprenentment, és el nivell d'alcohol.
+</p>
+</font>
+\end{verbatim}
+
+    \hypertarget{es-pot-inferir-a-partir-del-volum-dalcohol-la-qualitat-del-vi}{%
+\subsubsection{Es pot inferir, a partir del volum d'alcohol, la qualitat
+del
+vi?}\label{es-pot-inferir-a-partir-del-volum-dalcohol-la-qualitat-del-vi}}
+
+ Per tractar de respondre a aquesta pregunta, analitzarem la relació
+entre les dimensions \texttt{alcohol\ \textasciitilde{}\ qualitat} i, si
+escau, crearem un model de regressió lineal per tal de veure com es
+relacionen. 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{alcohol\PYZus{}quality\PYZus{}df} \PY{o}{=} \PY{n}{wine\PYZus{}df}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alcohol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+         
+         \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{alcohol\PYZus{}quality\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alcohol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{alcohol\PYZus{}quality\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Graduació alcoholica}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Qualitat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_36_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Com podem observar, en aquest cas és obvi que sobre aquestes dades no es
+pot aplicar un model de regressió lineal, ja que el resultat serà de
+molt baixa qualitat. Això és degut al fet que la variable qualitat és
+discreta, i no continua. Tanmateix, s'observa una mena de diagonal que
+podria fer-nos intuir que la qualitat augmenta així com ho fa la
+graduació alcohòlica. En cas de voler realitzar una regressió lineal amb
+les eines usades en aquest exercici, s'hauria d'implementar un codi molt
+semblant al descrit a la documentació de sklearn.
+
+Creiem que, com que ja disposem d'un model per inferir la qualitat del
+vi, el que podríem fer és tractar d'entrenar el model només amb la
+graduació alcohòlica i analitzar-ne el comportament.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{p}{(}\PY{n}{X\PYZus{}alcohol\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}alcohol\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}alcohol\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}alcohol\PYZus{}test}\PY{p}{)} \PY{o}{=} \PY{n}{split\PYZus{}train\PYZus{}test}\PY{p}{(}\PY{n}{alcohol\PYZus{}quality\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alcohol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{encode\PYZus{}raw\PYZus{}y}\PY{p}{(}\PY{n}{raw\PYZus{}y}\PY{p}{)}\PY{p}{)}
+         \PY{n}{X\PYZus{}alcohol\PYZus{}train} \PY{o}{=} \PY{n}{X\PYZus{}alcohol\PYZus{}train}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{X\PYZus{}alcohol\PYZus{}test} \PY{o}{=} \PY{n}{X\PYZus{}alcohol\PYZus{}test}\PY{o}{.}\PY{n}{values}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{rfc\PYZus{}alcohol\PYZus{}model} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{bootstrap}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{n\PYZus{}estimators} \PY{o}{=} \PY{l+m+mi}{150}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{RANDOM\PYZus{}SEED}\PY{p}{)}
+         \PY{n}{rfc\PYZus{}alcohol\PYZus{}model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}alcohol\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}alcohol\PYZus{}train}\PY{p}{)}
+         \PY{n}{rfc\PYZus{}alcohol\PYZus{}score} \PY{o}{=} \PY{n}{rfc\PYZus{}alcohol\PYZus{}model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}alcohol\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}alcohol\PYZus{}test}\PY{p}{)}
+         
+         \PY{n}{display\PYZus{}precission}\PY{p}{(}\PY{n}{rfc\PYZus{}alcohol\PYZus{}score}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precisió del model: 67.08 \%
+
+    \end{Verbatim}
+
+    Notem com la precisió ha caigut considerablement, com era d'esperar. A
+més, també hem de tenir present que encara que 67\% no sembli un valor
+especialment baix, no és gaire vàlid. Donat que estam intentant modelar
+sobre dues classes, un classificador aleatori ens haurà de donar un 50\%
+de precisió, així que aquest és el nostre punt de partida.
+
+Com a resposta a la pregunta original, que es demana ``Es pot inferir, a
+partir del volum d'alcohol, la qualitat del vi?'', amb els resultats
+obtinguts, tot i no ser una precisió menyspreable, consideram que el
+model no és suficientment vàlid com per determinar la qualitat del vi
+només coneixent-ne el volum d'alcohol.
+
+    \hypertarget{representacio-dels-resultats-a-partir-de-taules-i-grafiques.}{%
+\subsection{5. Representació dels resultats a partir de taules i
+gràfiques.}\label{representacio-dels-resultats-a-partir-de-taules-i-grafiques.}}
+
+Durant les diferents etapes de neteja i anàlisi hem mostrat les taules i
+gràfiques adients per entendre el comportament de les accions. Tot i
+això, a continuació inserim una sèrie de gràfiques addicionals que
+permeten obtenir encara més coneixement del conjunt de dades.
+
+    \hypertarget{anuxe0lisi-de-normalitat}{%
+\subsubsection{Anàlisi de normalitat}\label{anuxe0lisi-de-normalitat}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{plot\PYZus{}qq}\PY{p}{(}\PY{n}{keys}\PY{p}{)}\PY{p}{:}
+             \PY{k}{if} \PY{n}{keys} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{:}
+                 \PY{n}{keys} \PY{o}{=} \PY{n+nb}{list}\PY{p}{(}\PY{n}{wine\PYZus{}df}\PY{p}{)}
+                 
+             \PY{n}{cols} \PY{o}{=} \PY{l+m+mi}{4}
+             \PY{n}{rows} \PY{o}{=} \PY{n}{math}\PY{o}{.}\PY{n}{ceil}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{keys}\PY{p}{)}\PY{o}{/}\PY{n}{cols}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{25}\PY{p}{,} \PY{l+m+mi}{7}\PY{p}{)}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{attr\PYZus{}key} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{keys}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{rows}\PY{p}{,} \PY{n}{cols}\PY{p}{,} \PY{n}{i}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{attr} \PY{o}{=} \PY{n}{wine\PYZus{}df}\PY{p}{[}\PY{n}{attr\PYZus{}key}\PY{p}{]}
+                 \PY{n}{stats}\PY{o}{.}\PY{n}{probplot}\PY{p}{(}\PY{n}{attr}\PY{p}{,} \PY{n}{dist}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{norm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{plot}\PY{o}{=}\PY{n}{plt}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}qq}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{alcohol}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    La gràfica Q-Q és molt usada per comprovar la normalitat d'unes sèries
+de dades. Tanmateix, amb la informació trobada a l'apartat 4.2 ha sigut
+suficient per veure la normalitat de les dades, així que aquesta
+implementació ha quedat relegada a una mena d'apèndix. Com més
+s'aproximen els quantils teòrics a la bisectriu, més normal és la
+distribució. Fins i tot, podem veure que la distribució de l'atribut de
+la qualitat, tot i ser discret, és distribueix de forma equitativa al
+llarg de la bisectriu. 
+
+    \hypertarget{arbre-de-decisiuxf3}{%
+\subsubsection{Arbre de decisió}\label{arbre-de-decisiuxf3}}
+
+    Seleccionat una mostra aleatòria dels 250 arbres del
+\emph{RandomForest}, observam com l'arbre de decisió és relativament
+complex. Tot i això, renderitzar-lo és una bona manera de seguir les
+decisions que aquests pren en funció de les dades d'entrada. Per
+simplificar el model visualment, podem generar un nou
+\emph{RandomForest} definit una profunditat màxima dels arbres. Així,
+òbviament perdrem qualitat de predicció, però és un bon exercici
+acadèmic.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{render\PYZus{}tree}\PY{p}{(}\PY{n}{tree}\PY{p}{)}\PY{p}{:}
+             \PY{n}{dot\PYZus{}data} \PY{o}{=} \PY{n}{StringIO}\PY{p}{(}\PY{p}{)}
+             \PY{n}{export\PYZus{}graphviz}\PY{p}{(}\PY{n}{tree}\PY{p}{,} \PY{n}{out\PYZus{}file}\PY{o}{=}\PY{n}{dot\PYZus{}data}\PY{p}{,}  
+                             \PY{n}{filled}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{rounded}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,}
+                             \PY{n}{class\PYZus{}names}\PY{o}{=}\PY{n}{CLASSES\PYZus{}NAMES}\PY{p}{,}
+                             \PY{n}{feature\PYZus{}names}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{wine\PYZus{}df}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quality}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}\PY{p}{,}
+                             \PY{n}{special\PYZus{}characters}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+             \PY{n}{graph} \PY{o}{=} \PY{n}{pydotplus}\PY{o}{.}\PY{n}{graph\PYZus{}from\PYZus{}dot\PYZus{}data}\PY{p}{(}\PY{n}{dot\PYZus{}data}\PY{o}{.}\PY{n}{getvalue}\PY{p}{(}\PY{p}{)}\PY{p}{)}  
+             \PY{n}{display}\PY{p}{(}\PY{n}{Image}\PY{p}{(}\PY{n}{graph}\PY{o}{.}\PY{n}{create\PYZus{}png}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Render random forest sample tree}
+         \PY{n}{sample\PYZus{}tree} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{rfc\PYZus{}model}\PY{o}{.}\PY{n}{estimators\PYZus{}}\PY{p}{)}
+         \PY{n}{render\PYZus{}tree}\PY{p}{(}\PY{n}{sample\PYZus{}tree}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_47_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{rfc\PYZus{}model\PYZus{}basic\PYZus{}trees} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}\PY{n}{max\PYZus{}depth}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{bootstrap}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{n\PYZus{}estimators} \PY{o}{=} \PY{l+m+mi}{150}\PY{p}{,} \PY{n}{n\PYZus{}jobs}\PY{o}{=}\PY{l+m+mi}{8}\PY{p}{,} \PY{n}{random\PYZus{}state}\PY{o}{=}\PY{n}{RANDOM\PYZus{}SEED}\PY{p}{)}
+         \PY{n}{rfc\PYZus{}model\PYZus{}basic\PYZus{}trees}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{)}
+         
+         \PY{n}{sample\PYZus{}tree} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{rfc\PYZus{}model\PYZus{}basic\PYZus{}trees}\PY{o}{.}\PY{n}{estimators\PYZus{}}\PY{p}{)}
+         \PY{n}{render\PYZus{}tree}\PY{p}{(}\PY{n}{sample\PYZus{}tree}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Precisió del model: }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZpc{}}\PY{l+s+s2}{\PYZdq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{round}\PY{p}{(}\PY{n}{rfc\PYZus{}model\PYZus{}basic\PYZus{}trees}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{o}{*}\PY{l+m+mi}{100}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Precisió del model: 71.25 \%
+
+    \end{Verbatim}
+
+    Ara sí, podem avaluar i seguir fàcilment les decisions que pren aquest
+nou model. Sorprenentment observem com la precisió del conjunt del
+\emph{Random Forest} no ha baixat gaire, i es situa en un 71.25\%, només
+7.5 punts per sota del model original.
+
+    \hypertarget{matriu-de-confusiuxf3}{%
+\subsubsection{Matriu de confusió}\label{matriu-de-confusiuxf3}}
+
+Una altra eina molt útil a l'hora d'avaluar models de regressió és la
+matriu de confusió. Aquesta ens mostra, per cada classe, el nombre de
+Vertaders positius (\emph{TP}), Falsos postius (\emph{FP}), Vertaders
+Negatius (\emph{TN}) i Falsos negatius (\emph{FN}).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{c+c1}{\PYZsh{} http://scikit\PYZhy{}learn.org/stable/auto\PYZus{}examples/model\PYZus{}selection/plot\PYZus{}confusion\PYZus{}matrix.html}
+         \PY{k}{def} \PY{n+nf}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n}{classes}\PY{p}{,}
+                                   \PY{n}{normalize}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,}
+                                   \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Matriu de confusió}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                   \PY{n}{cmap}\PY{o}{=}\PY{n}{plt}\PY{o}{.}\PY{n}{cm}\PY{o}{.}\PY{n}{Blues}\PY{p}{)}\PY{p}{:}
+             \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+         \PY{l+s+sd}{    This function prints and plots the confusion matrix.}
+         \PY{l+s+sd}{    Normalization can be applied by setting `normalize=True`.}
+         \PY{l+s+sd}{    \PYZdq{}\PYZdq{}\PYZdq{}}
+             \PY{k}{if} \PY{n}{normalize}\PY{p}{:}
+                 \PY{n}{cm} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{float}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{o}{/} \PY{n}{cm}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{cm}\PY{p}{,} \PY{n}{interpolation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{n}{cmap}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n}{title}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{colorbar}\PY{p}{(}\PY{p}{)}
+             \PY{n}{tick\PYZus{}marks} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{tick\PYZus{}marks}\PY{p}{,} \PY{n}{classes}\PY{p}{,} \PY{n}{rotation}\PY{o}{=}\PY{l+m+mi}{45}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{yticks}\PY{p}{(}\PY{n}{tick\PYZus{}marks}\PY{p}{,} \PY{n}{classes}\PY{p}{)}
+         
+             \PY{n}{fmt} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{.2f}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{normalize} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{d}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n}{thresh} \PY{o}{=} \PY{n}{cm}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.}
+             \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{j} \PY{o+ow}{in} \PY{n}{itertools}\PY{o}{.}\PY{n}{product}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{cm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n}{cm}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{plt}\PY{o}{.}\PY{n}{text}\PY{p}{(}\PY{n}{j}\PY{p}{,} \PY{n}{i}\PY{p}{,} \PY{n+nb}{format}\PY{p}{(}\PY{n}{cm}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]}\PY{p}{,} \PY{n}{fmt}\PY{p}{)}\PY{p}{,}
+                          \PY{n}{horizontalalignment}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{center}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                          \PY{n}{color}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{white}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{n}{cm}\PY{p}{[}\PY{n}{i}\PY{p}{,} \PY{n}{j}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{n}{thresh} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{black}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+             \PY{n}{plt}\PY{o}{.}\PY{n}{tight\PYZus{}layout}\PY{p}{(}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{True label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Predicted label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{rfc\PYZus{}model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{cnf\PYZus{}matrix} \PY{o}{=} \PY{n}{confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+         
+         \PY{n}{plot\PYZus{}confusion\PYZus{}matrix}\PY{p}{(}\PY{n}{cnf\PYZus{}matrix}\PY{p}{,} \PY{n}{CLASSES\PYZus{}NAMES}\PY{p}{,} \PY{n}{normalize}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_52_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     Podem observar com les prediccions, tant encertades com errònies estan
+molt equilibrades, així que no sembla que cap de les dues classes sigui
+un factor determinant a l'hora d'usar el model generat. Això és degut al
+fet que el \emph{threshold} definit per dir si un vi és bo o dolent és
+molt proper a la mitjana i coincideix amb la mediana.
+
+    \hypertarget{resolucio-del-problema.-a-partir-dels-resultats-obtinguts-quines-son-les-conclusions-els-resultats-permeten-respondre-al-problema}{%
+\subsection{6. Resolució del problema. A partir dels resultats
+obtinguts, quines són les conclusions? Els resultats permeten respondre
+al
+problema?}\label{resolucio-del-problema.-a-partir-dels-resultats-obtinguts-quines-son-les-conclusions-els-resultats-permeten-respondre-al-problema}}
+
+    Com hem pogut veure al llarg de tot el document, tots els atributs
+presents ajuden a determinar la qualitat del vi. Tot i això, hem
+observat com atributs com els atributs d'alcohol, sulfats o l'acidesa
+volàtil tenen més pes a la qualitat del vi. A més, aquesta idea ha estat
+doblement validada, ja que hem descobert aquesta informació mitjançant
+l'anàlisi de correlacions i mitjançant el \emph{Random Forest}.
+
+Per altre costat, hem pogut veure que podem predir la qualitat del vi a
+partir de l'alcohol amb una precisió del 67\%. Tot i que hi ha estudis
+que donen per bones precisions per sobre del 60\%, el nostre llindar és
+a partir del 80\% de precisió per considerar un model com fiable. Per
+tant, s'hauran de recórrer a més atributs per poder predir la qualitat
+de forma lineal.
+
+\begin{verbatim}
+<p>
+    Per altra banda, gràcies a respondre les preguntes originals, també hem pogut construir un model de predicció bastant robust que pot classificar els vins entre bons i, diguem-ne, no tan bons, amb una fiabilitat de gairebé el 79%. Com ja s'ha comentat, si a aquest model li donem dades d'anys posteriors a l'any 2009 per entrenar-se, obtindrem un classificador molt fiable per determinar la qualitat dels vins d'enguany.
+</p>
+</font>
+\end{verbatim}
+
+    \hypertarget{codi-cal-adjuntar-el-codi-preferiblement-en-r-amb-el-que-sha-realitzat-la-neteja-analisi-i-representacio-de-les-dades.-si-ho-preferiu-tambe-podeu-treballar-en-python}{%
+\subsection{7. Codi: Cal adjuntar el codi, preferiblement en R, amb el
+que s'ha realitzat la neteja, anàlisi i representació de les dades. Si
+ho preferiu, també podeu treballar en
+Python}\label{codi-cal-adjuntar-el-codi-preferiblement-en-r-amb-el-que-sha-realitzat-la-neteja-analisi-i-representacio-de-les-dades.-si-ho-preferiu-tambe-podeu-treballar-en-python}}
+
+     Tot el codi emprat en aquesta pràctica es pot trobar en les diferents
+preguntes en les cel·les precedides amb \texttt{In\ {[}\ {]}} i es poden
+executar des de jupyter o qualsevol terminal interactiva de Python. 
+
+    \hypertarget{expotaciuxf3-del-fitxer-amb-les-dades-tractades}{%
+\subsection{8. Expotació del fitxer amb les dades
+tractades}\label{expotaciuxf3-del-fitxer-amb-les-dades-tractades}}
+
+ Donat que no s'ha hagut d'aplicar cap modificació a les dades originals
+i s'han fet servir totes les variables, podem dir que el \emph{dataset}
+amb les dades tractades és el mateix que l'original. Tot i això, per
+demostrar l'ús de l'eina d'exportaicó, adjuntarem la classe que defineix
+si el vi és bo o dolent com una columna més, i procedirem a exportar el
+\emph{dataset}. 
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{TREATED\PYZus{}CSV\PYZus{}PATH} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dataset\PYZhy{}tractat.csv}\PY{l+s+s1}{\PYZsq{}}
+         
+         \PY{n}{exportable\PYZus{}df} \PY{o}{=} \PY{n}{wine\PYZus{}df}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{n}{exportable\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{raw\PYZus{}y}
+         \PY{n}{exportable\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{exportable\PYZus{}df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{label}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{map}\PY{p}{(}\PY{p}{\PYZob{}}\PY{k+kc}{True}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GoodWine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{False}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{BadWine}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{)}
+         
+         \PY{n}{exportable\PYZus{}df}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{n}{TREATED\PYZus{}CSV\PYZus{}PATH}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{;}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
